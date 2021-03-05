@@ -1,6 +1,7 @@
 package com.example.zivame_assignment.ui.gadgetlist.di
 
 import androidx.lifecycle.ViewModel
+import com.example.zivame_assignment.application.viewmodel.ViewModelKey
 import com.example.zivame_assignment.ui.gadgetlist.viewmodel.GadgetListViewModel
 import dagger.Binds
 import dagger.Module
