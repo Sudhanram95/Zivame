@@ -7,6 +7,6 @@ import com.example.zivame_assignment.R
 class GadgetListActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_gadget_list)
     }
 }
