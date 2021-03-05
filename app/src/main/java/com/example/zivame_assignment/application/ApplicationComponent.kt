@@ -6,7 +6,8 @@ import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjector
 
-@Component(modules = [NetworkModule::class])
+@Component(modules = [NetworkModule::class,
+                        ActivityBuilderModule::class])
 interface ApplicationComponent : AndroidInjector<ZivameApplication> {
 
     @Component.Builder
