@@ -7,7 +7,7 @@ import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
-class GadgetListRepository @Inject constructor(val apiService: GadgetListApiService) {
+class GadgetListRepository @Inject constructor(private val apiService: GadgetListApiService) {
 
     fun getAllGadgetsFromApi(networkCallback: NetworkCallback) {
         apiService.getAllGadgetsList()
