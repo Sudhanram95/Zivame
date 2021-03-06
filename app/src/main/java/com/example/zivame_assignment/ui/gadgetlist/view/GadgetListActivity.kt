@@ -46,4 +46,9 @@ class GadgetListActivity : DaggerAppCompatActivity() {
             }
         })
     }
+
+    override fun onStop() {
+        super.onStop()
+        gadgetListViewModel.getGadgetList().removeObservers(this)
+    }
 }
