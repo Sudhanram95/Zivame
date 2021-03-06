@@ -51,7 +51,7 @@ class CartAdapter(val context: Context,
         holder.txtProductPrice.text = "Rs. ${cartEntity.price}"
 
         holder.txtRemove.setOnClickListener {
-
+            (context as RemoveItemListener).onRemoveItemFromCart(position, cartEntity)
         }
     }
 

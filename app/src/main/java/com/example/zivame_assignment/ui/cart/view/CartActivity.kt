@@ -7,15 +7,17 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.zivame_assignment.R
 import com.example.zivame_assignment.application.viewmodel.ViewModelFactory
+import com.example.zivame_assignment.database.CartEntity
 import com.example.zivame_assignment.ui.cart.viewmodel.CartViewModel
 import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_cart.*
 import javax.inject.Inject
 
-class CartActivity : DaggerAppCompatActivity() {
+class CartActivity : DaggerAppCompatActivity(), RemoveItemListener {
 
     @Inject lateinit var viewModelFactory: ViewModelFactory
     lateinit var cartViewModel: CartViewModel
+    lateinit var cartAdapter: CartAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,7 +34,7 @@ class CartActivity : DaggerAppCompatActivity() {
 
     private fun observeViewModel() {
         cartViewModel.getCartList().observe(this, Observer {
-            val cartAdapter = CartAdapter(this, it.toMutableList())
+            cartAdapter = CartAdapter(this, it.toMutableList())
             rvCart.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
             rvCart.adapter = cartAdapter
         })
@@ -40,6 +42,13 @@ class CartActivity : DaggerAppCompatActivity() {
         cartViewModel.getResult().observe(this, Observer {
             Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
         })
+    }
+
+    override fun onRemoveItemFromCart(position: Int, cartEntity: CartEntity) {
+        cartViewModel.removeItemFromCart(cartEntity.itemId)
+        if (this::cartAdapter.isInitialized) {
+            cartAdapter.removeItemFromCart(position, cartEntity)
+        }
     }
 
     override fun onStop() {

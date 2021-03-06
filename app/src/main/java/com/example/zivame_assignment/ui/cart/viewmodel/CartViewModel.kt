@@ -19,18 +19,25 @@ class CartViewModel @Inject constructor(val repository: CartRepository) : ViewMo
         repository.getAllItemsInCartTable(object : DatabaseCallback {
             override fun onSuccess(response: Any) {
                 if (response is List<*>) {
-                    cartListLiveData.value = response.filterIsInstance<CartEntity>()
+                    cartListLiveData.postValue(response.filterIsInstance<CartEntity>())
                 }
             }
 
             override fun onFailure() {
-                resultLiveData.value = "Could not get Items!"
+                resultLiveData.postValue( "Could not get Items!")
             }
         })
     }
 
     fun removeItemFromCart(itemId: Int) {
-        repository.removeItemFromCartTable(itemId)
-        resultLiveData.value = "Gadget removed from cart"
+        repository.removeItemFromCartTable(itemId, object : DatabaseCallback {
+            override fun onSuccess(response: Any) {
+                resultLiveData.postValue(response as String)
+            }
+
+            override fun onFailure() {
+                resultLiveData.postValue( "Could not remove item!")
+            }
+        })
     }
 }
