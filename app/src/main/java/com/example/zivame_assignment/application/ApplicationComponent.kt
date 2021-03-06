@@ -6,7 +6,9 @@ import com.example.zivame_assignment.network.NetworkModule
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjector
+import javax.inject.Singleton
 
+@Singleton
 @Component(modules = [AndroidSupportInjectionModule::class,
                         NetworkModule::class,
                         ActivityBuilderModule::class,
