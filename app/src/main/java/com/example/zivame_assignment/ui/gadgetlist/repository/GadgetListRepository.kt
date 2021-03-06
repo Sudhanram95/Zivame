@@ -1,5 +1,6 @@
 package com.example.zivame_assignment.ui.gadgetlist.repository
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.zivame_assignment.application.ZivameApplication
 import com.example.zivame_assignment.database.CartEntity
@@ -49,5 +50,13 @@ class GadgetListRepository @Inject constructor(val apiService: GadgetListApiServ
                 databaseCallback.onAddedToTableResult(cartDao.addItemToCart(cartEntity))
             }
         }
+    }
+
+    fun getBadgeCountFromDb(): LiveData<Int>? {
+        db?.let {
+            val cartDao = it.cartDao()
+            return cartDao.getItemCount()
+        }
+        return null
     }
 }

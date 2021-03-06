@@ -62,6 +62,10 @@ class GadgetListActivity : DaggerAppCompatActivity(), AddToCartListener {
         gadgetListViewModel.getToastMessage().observe(this, Observer {
             Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
         })
+
+        gadgetListViewModel.getBadgeCount()?.observe(this, Observer {
+            txtBadgeCount.text = it.toString()
+        })
     }
 
     override fun onAddToCart(id: Int, productModel: ProductModel) {

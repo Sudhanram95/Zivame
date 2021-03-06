@@ -18,6 +18,7 @@ constructor(val repository: GadgetListRepository) : ViewModel() {
 
     fun getGadgetList() = gadgetListLiveData
     fun getToastMessage() = toastMessageLiveData
+    fun getBadgeCount() = repository.getBadgeCountFromDb()
 
     fun fetchAllGadgets() {
         gadgetListLiveData.value = NetworkState.Loading()
