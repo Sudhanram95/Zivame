@@ -14,7 +14,7 @@ class CartRepository @Inject constructor(val dbInstance: ZivameDatabase?) {
         cartDao = dbInstance?.cartDao()
     }
 
-    fun getAllItemsInCartTable(): LiveData<List<CartEntity>>? {
+    fun getAllItemsInCartTable(): List<CartEntity>? {
         return cartDao?.getAllItemsInCart()
     }
 
