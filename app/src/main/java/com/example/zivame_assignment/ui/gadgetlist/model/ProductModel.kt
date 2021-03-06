@@ -13,6 +13,6 @@ class ProductModel {
     @SerializedName("image_url")
     var imageUrl: String = ""
 
-    @SerializedName("")
-    var rating: Int = 0
+    @SerializedName("rating")
+    var rating: Float = 0.0f
 }

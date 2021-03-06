@@ -42,7 +42,7 @@ class GadgetAdapter(val context: Context,
 
         val productDetail = productList.get(position)
 
-        holder.ratingBar.numStars = productDetail.rating
+        holder.ratingBar.rating = productDetail.rating
 
         Glide.with(context)
             .load(productDetail.imageUrl)
