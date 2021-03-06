@@ -47,7 +47,9 @@ class GadgetListActivity : DaggerAppCompatActivity(), AddToCartListener {
     private fun observeViewModel() {
         gadgetListViewModel.getGadgetList().observe(this, Observer {
             when(it) {
-                is NetworkState.Loading -> {}
+                is NetworkState.Loading -> {
+                    //TODO: Loading implementation
+                }
 
                 is NetworkState.Success -> {
                     val gadgetAdapter = GadgetAdapter(this, it.data)
@@ -55,7 +57,9 @@ class GadgetListActivity : DaggerAppCompatActivity(), AddToCartListener {
                     rvGadgets.adapter = gadgetAdapter
                 }
 
-                is NetworkState.Error -> {}
+                is NetworkState.Error -> {
+                    //TODO: Network error handling
+                }
             }
         })
 

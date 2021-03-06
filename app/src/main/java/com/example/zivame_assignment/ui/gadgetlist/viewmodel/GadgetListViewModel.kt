@@ -38,9 +38,12 @@ constructor(val repository: GadgetListRepository) : ViewModel() {
 
     fun addGadgetToCart(productId: Int, productModel: ProductModel) {
         repository.addGadgetToCart(productId, productModel, object : DatabaseCallback {
-            override fun onAddedToTableResult(result: Long) {
-                toastMessageLiveData.postValue(if (result > 0) "Added to cart successfully"
-                                                else "Already added to cart")
+            override fun onSuccess() {
+                toastMessageLiveData.postValue("Added to cart successfully")
+            }
+
+            override fun onFailure() {
+                toastMessageLiveData.postValue("Already added to cart")
             }
         })
     }

@@ -44,5 +44,8 @@ class CartActivity : DaggerAppCompatActivity() {
 
     override fun onStop() {
         super.onStop()
+
+        cartViewModel.getCartList().removeObservers(this)
+        cartViewModel.getResult().removeObservers(this)
     }
 }
