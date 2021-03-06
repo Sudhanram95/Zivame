@@ -1,11 +1,13 @@
 package com.example.zivame_assignment.database
 
 import android.content.Context
+import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.zivame_assignment.application.ZivameApplication
 import java.util.concurrent.Executors
 
+@Database(entities = [CartEntity::class], version = 1, exportSchema = false)
 abstract class ZivameDatabase : RoomDatabase() {
 
     abstract fun cartDao(): CartDao
