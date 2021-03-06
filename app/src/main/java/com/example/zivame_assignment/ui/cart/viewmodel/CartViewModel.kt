@@ -14,6 +14,7 @@ class CartViewModel @Inject constructor(val repository: CartRepository) : ViewMo
 
     fun getCartList() = cartListLiveData
     fun getResult() = resultLiveData
+    fun getTotalAmount() = repository.getTotalAmount()
 
     fun fetchAllItemsInCart() {
         repository.getAllItemsInCartTable(object : DatabaseCallback {

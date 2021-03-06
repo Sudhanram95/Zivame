@@ -1,6 +1,7 @@
 package com.example.zivame_assignment.ui.cart.view
 
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -41,6 +42,11 @@ class CartActivity : DaggerAppCompatActivity(), RemoveItemListener {
 
         cartViewModel.getResult().observe(this, Observer {
             Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+        })
+
+        cartViewModel.getTotalAmount()?.observe(this, Observer {
+            Log.e("CartActivity", "Total Amount: $it")
+            //TODO: Show the total amount in cart activity
         })
     }
 

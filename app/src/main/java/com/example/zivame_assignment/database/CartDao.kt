@@ -20,4 +20,7 @@ interface CartDao {
 
     @Query("DELETE FROM cart_table WHERE itemId = :id")
     fun removeFromCart(id: Int)
+
+    @Query("SELECT SUM(price) FROM cart_table")
+    fun getTotalAmount(): LiveData<Int>
 }
