@@ -49,7 +49,7 @@ class GadgetListRepository @Inject constructor(val apiService: GadgetListApiServ
                 val cartDao = it.cartDao()
 
                 val result = cartDao.addItemToCart(cartEntity)
-                if (result > 0) databaseCallback.onSuccess()
+                if (result > 0) databaseCallback.onSuccess(result)
                 else databaseCallback.onFailure()
             }
         }
