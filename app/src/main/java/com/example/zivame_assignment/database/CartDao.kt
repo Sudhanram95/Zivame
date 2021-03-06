@@ -13,7 +13,7 @@ interface CartDao {
     fun addItemToCart(item: CartEntity): Long
 
     @Query("SELECT * FROM cart_table")
-    fun getAllItemsInCart(): List<CartEntity>
+    fun getAllItemsInCart(): LiveData<List<CartEntity>>
 
     @Query("SELECT COUNT(itemId) FROM cart_table")
     fun getItemCount(): LiveData<Int>
