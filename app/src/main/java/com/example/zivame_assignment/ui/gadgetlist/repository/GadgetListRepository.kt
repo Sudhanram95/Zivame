@@ -14,11 +14,8 @@ import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
-class GadgetListRepository @Inject constructor(val apiService: GadgetListApiService) {
-    var db: ZivameDatabase? = null
-    init {
-        db = ZivameDatabase.getDatabase(ZivameApplication.getApplicationContext())
-    }
+class GadgetListRepository @Inject constructor(val apiService: GadgetListApiService,
+                                               val dbInstance: ZivameDatabase?) {
 
     fun getAllGadgetsFromApi(networkCallback: NetworkCallback) {
         apiService.getAllGadgetsList()
@@ -45,7 +42,7 @@ class GadgetListRepository @Inject constructor(val apiService: GadgetListApiServ
                 imageUrl = productModel.imageUrl
             }
 
-            db?.let {
+            dbInstance?.let {
                 val cartDao = it.cartDao()
 
                 val result = cartDao.addItemToCart(cartEntity)
@@ -56,7 +53,7 @@ class GadgetListRepository @Inject constructor(val apiService: GadgetListApiServ
     }
 
     fun getBadgeCountFromDb(): LiveData<Int>? {
-        db?.let {
+        dbInstance?.let {
             val cartDao = it.cartDao()
             return cartDao.getItemCount()
         }
