@@ -1,5 +1,6 @@
 package com.example.zivame_assignment.application
 
+import com.example.zivame_assignment.ui.cart.di.CartModule
 import com.example.zivame_assignment.ui.cart.di.CartScope
 import com.example.zivame_assignment.ui.cart.di.CartViewModelModule
 import com.example.zivame_assignment.ui.cart.view.CartActivity
@@ -18,6 +19,6 @@ abstract class ActivityBuilderModule {
     abstract fun contributeGadgetListActivity(): GadgetListActivity
 
     @CartScope
-    @ContributesAndroidInjector(modules = [CartViewModelModule::class])
+    @ContributesAndroidInjector(modules = [CartModule::class, CartViewModelModule::class])
     abstract fun contributeCartActivity(): CartActivity
 }
