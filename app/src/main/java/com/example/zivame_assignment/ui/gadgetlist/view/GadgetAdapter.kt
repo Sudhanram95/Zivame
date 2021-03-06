@@ -51,7 +51,7 @@ class GadgetAdapter(val context: Context,
         holder.txtProductName.text = productDetail.name
 
         holder.btnAddToCart.setOnClickListener {
-            Toast.makeText(context, "Added to cart", Toast.LENGTH_SHORT).show()
+            (context as AddToCartListener).onAddToCart(position, productDetail)
         }
     }
 }

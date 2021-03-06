@@ -2,6 +2,7 @@ package com.example.zivame_assignment.ui.gadgetlist.view
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
@@ -9,12 +10,13 @@ import com.example.zivame_assignment.R
 import com.example.zivame_assignment.application.viewmodel.ViewModelFactory
 import com.example.zivame_assignment.network.NetworkState
 import com.example.zivame_assignment.ui.cart.view.CartActivity
+import com.example.zivame_assignment.ui.gadgetlist.model.ProductModel
 import com.example.zivame_assignment.ui.gadgetlist.viewmodel.GadgetListViewModel
 import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_gadget_list.*
 import javax.inject.Inject
 
-class GadgetListActivity : DaggerAppCompatActivity() {
+class GadgetListActivity : DaggerAppCompatActivity(), AddToCartListener {
 
     @Inject lateinit var viewModelFactory: ViewModelFactory
     lateinit var gadgetListViewModel: GadgetListViewModel
@@ -56,6 +58,14 @@ class GadgetListActivity : DaggerAppCompatActivity() {
                 is NetworkState.Error -> {}
             }
         })
+
+        gadgetListViewModel.getToastMessage().observe(this, Observer {
+            Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+        })
+    }
+
+    override fun onAddToCart(id: Int, productModel: ProductModel) {
+        gadgetListViewModel.addGadgetToCart(id, productModel)
     }
 
     override fun onStop() {

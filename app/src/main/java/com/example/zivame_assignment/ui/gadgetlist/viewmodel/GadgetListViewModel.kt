@@ -2,6 +2,7 @@ package com.example.zivame_assignment.ui.gadgetlist.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.zivame_assignment.database.DatabaseCallback
 import com.example.zivame_assignment.network.NetworkCallback
 import com.example.zivame_assignment.network.NetworkState
 import com.example.zivame_assignment.ui.gadgetlist.model.GadgetListResponse
@@ -13,8 +14,10 @@ class GadgetListViewModel @Inject
 constructor(val repository: GadgetListRepository) : ViewModel() {
 
     private val gadgetListLiveData = MutableLiveData<NetworkState<List<ProductModel>>>()
+    private val toastMessageLiveData = MutableLiveData<String>()
 
     fun getGadgetList() = gadgetListLiveData
+    fun getToastMessage() = toastMessageLiveData
 
     fun fetchAllGadgets() {
         gadgetListLiveData.value = NetworkState.Loading()
@@ -28,6 +31,15 @@ constructor(val repository: GadgetListRepository) : ViewModel() {
 
             override fun onError(error: Throwable) {
                 gadgetListLiveData.value = NetworkState.Error(error)
+            }
+        })
+    }
+
+    fun addGadgetToCart(productId: Int, productModel: ProductModel) {
+        repository.addGadgetToCart(productId, productModel, object : DatabaseCallback {
+            override fun onAddedToTableResult(result: Long) {
+                toastMessageLiveData.value = if (result > 0) "Added to cart successfully"
+                                                else "Already added to cart"
             }
         })
     }
