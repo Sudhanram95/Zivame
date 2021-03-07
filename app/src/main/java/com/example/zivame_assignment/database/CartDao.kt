@@ -1,10 +1,7 @@
 package com.example.zivame_assignment.database
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 
 @Dao
 interface CartDao {
@@ -23,4 +20,7 @@ interface CartDao {
 
     @Query("SELECT SUM(price) FROM cart_table")
     fun getTotalAmount(): LiveData<Int>
+
+    @Query("DELETE FROM cart_table")
+    fun deleteAllItem()
 }

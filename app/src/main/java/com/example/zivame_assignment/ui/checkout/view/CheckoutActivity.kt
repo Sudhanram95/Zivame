@@ -14,13 +14,14 @@ import javax.inject.Inject
 
 class CheckoutActivity : DaggerAppCompatActivity() {
 
+    @Inject lateinit var viewModelFactory: ViewModelFactory
     lateinit var checkoutViewModel: CheckoutViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_checkout)
 
-        checkoutViewModel = ViewModelProvider(this).get(CheckoutViewModel::class.java)
+        checkoutViewModel = ViewModelProvider(this, viewModelFactory).get(CheckoutViewModel::class.java)
         checkoutViewModel.startCountDown()
     }
 
@@ -40,11 +41,19 @@ class CheckoutActivity : DaggerAppCompatActivity() {
                 llCongratulation.visibility = View.VISIBLE
             }
         })
+
+        checkoutViewModel.getRemoveAllItems().observe(this, Observer {
+            if (it) {
+                checkoutViewModel.cancelTimer()
+                checkoutViewModel.removeAllItemsFromCart()
+            }
+        })
     }
 
     override fun onStop() {
         super.onStop()
         checkoutViewModel.getShowLoading().removeObservers(this)
+        checkoutViewModel.getRemoveAllItems().removeObservers(this)
     }
 
     override fun onDestroy() {
