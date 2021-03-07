@@ -41,7 +41,7 @@ class CheckoutViewModel @Inject constructor(val repository: CheckoutRepository) 
     fun removeAllItemsFromCart() {
         repository.deleteAllItemsFromCart(object : DatabaseCallback {
             override fun onSuccess(response: Any) {
-                showLoadingLiveData.value = false
+                showLoadingLiveData.postValue(false)
             }
 
             override fun onFailure() {

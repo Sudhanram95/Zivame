@@ -7,12 +7,14 @@ import javax.inject.Inject
 class CheckoutRepository @Inject constructor(val dbInstance: ZivameDatabase?) {
 
     fun deleteAllItemsFromCart(databaseCallback: DatabaseCallback) {
-        val cartDao = dbInstance?.cartDao()
-        if (cartDao != null) {
-            cartDao.deleteAllItem()
-            databaseCallback.onSuccess("Deleted successfully")
-        } else {
-            databaseCallback.onFailure()
+        ZivameDatabase.databaseWriteExecutor.execute {
+            val cartDao = dbInstance?.cartDao()
+            if (cartDao != null) {
+                cartDao.deleteAllItem()
+                databaseCallback.onSuccess("Deleted successfully")
+            } else {
+                databaseCallback.onFailure()
+            }
         }
     }
 }
