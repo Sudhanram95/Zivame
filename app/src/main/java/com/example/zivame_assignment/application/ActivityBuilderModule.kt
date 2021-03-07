@@ -26,6 +26,6 @@ abstract class ActivityBuilderModule {
     abstract fun contributeCartActivity(): CartActivity
 
     @CheckoutScope
-    @ContributesAndroidInjector(modules = [CheckoutViewModelModule::class])
+    @ContributesAndroidInjector
     abstract fun contributeCheckoutActivity(): CheckoutActivity
 }

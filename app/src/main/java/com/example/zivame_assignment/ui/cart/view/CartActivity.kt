@@ -1,5 +1,6 @@
 package com.example.zivame_assignment.ui.cart.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -10,6 +11,7 @@ import com.example.zivame_assignment.R
 import com.example.zivame_assignment.application.viewmodel.ViewModelFactory
 import com.example.zivame_assignment.database.CartEntity
 import com.example.zivame_assignment.ui.cart.viewmodel.CartViewModel
+import com.example.zivame_assignment.ui.checkout.view.CheckoutActivity
 import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_cart.*
 import javax.inject.Inject
@@ -25,7 +27,15 @@ class CartActivity : DaggerAppCompatActivity(), RemoveItemListener {
         setContentView(R.layout.activity_cart)
 
         cartViewModel = ViewModelProvider(this, viewModelFactory).get(CartViewModel::class.java)
+        initializeView()
+    }
+
+    private fun initializeView() {
         cartViewModel.fetchAllItemsInCart()
+        btnCheckout.setOnClickListener {
+            val intent = Intent(this, CheckoutActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     override fun onStart() {
