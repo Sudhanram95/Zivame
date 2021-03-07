@@ -1,5 +1,6 @@
 package com.example.zivame_assignment.ui.checkout.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -8,6 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.zivame_assignment.R
 import com.example.zivame_assignment.application.viewmodel.ViewModelFactory
 import com.example.zivame_assignment.ui.checkout.viewmodel.CheckoutViewModel
+import com.example.zivame_assignment.ui.gadgetlist.view.GadgetListActivity
 import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_checkout.*
 import javax.inject.Inject
@@ -22,7 +24,16 @@ class CheckoutActivity : DaggerAppCompatActivity() {
         setContentView(R.layout.activity_checkout)
 
         checkoutViewModel = ViewModelProvider(this, viewModelFactory).get(CheckoutViewModel::class.java)
+        initializeView()
+    }
+
+    private fun initializeView() {
         checkoutViewModel.startCountDown()
+        btnContinueShopping.setOnClickListener {
+            val intent = Intent(this, GadgetListActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
+        }
     }
 
     override fun onStart() {

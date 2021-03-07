@@ -52,6 +52,17 @@
             android:layout_marginTop="@dimen/_10sdp"
             style="@style/BigTextBold"
             android:text="Your order has been placed!"/>
+
+        <Button
+            android:id="@+id/btnContinueShopping"
+            android:layout_width="@dimen/_120sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:background="@drawable/border_rounded_corner"
+            android:text="Continue Shopping"
+            style="@style/SmallTextBold"
+            android:textAllCaps="false"/>
     </LinearLayout>
 
 </RelativeLayout>
