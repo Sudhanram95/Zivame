@@ -40,16 +40,18 @@
         <ImageView
             android:layout_width="@dimen/_200sdp"
             android:layout_height="@dimen/_200sdp"
-            android:src="@drawable/ic_congratuation"/>
+            android:src="@drawable/ic_congratuation"
+            android:layout_gravity="center_horizontal"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="50sp"
+            android:gravity="center"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="@dimen/_10sdp"
             style="@style/BigTextBold"
-            android:text="Thank You!"/>
+            android:text="Your order has been placed!"/>
     </LinearLayout>
 
 </RelativeLayout>
