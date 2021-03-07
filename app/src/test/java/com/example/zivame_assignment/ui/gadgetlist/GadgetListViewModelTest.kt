@@ -13,6 +13,7 @@ import com.example.zivame_assignment.ui.gadgetlist.model.ProductModel
 import com.example.zivame_assignment.ui.gadgetlist.repository.GadgetListApiService
 import com.example.zivame_assignment.ui.gadgetlist.repository.GadgetListRepository
 import com.example.zivame_assignment.ui.gadgetlist.viewmodel.GadgetListViewModel
+import com.google.common.util.concurrent.MoreExecutors
 import io.reactivex.Single
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
@@ -25,6 +26,7 @@ import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.Mockito.`when`
 import java.lang.Exception
+import java.util.concurrent.ExecutorService
 import java.util.concurrent.TimeUnit
 
 @RunWith(JUnit4::class)
@@ -46,7 +48,8 @@ class GadgetListViewModelTest : BaseTest() {
 
     @Before
     fun setUp() {
-        repository = GadgetListRepository(apiService, cartDao)
+        val executorService = MoreExecutors.newDirectExecutorService()
+        repository = GadgetListRepository(apiService, executorService, cartDao)
         viewModel = GadgetListViewModel(repository)
         viewModel.getGadgetList().observeForever(observerResponse)
         viewModel.getToastMessage().observeForever(observerAddItem)
@@ -77,9 +80,25 @@ class GadgetListViewModelTest : BaseTest() {
     }
 
     @Test
+    fun testCreateCartEntity() {
+        val testCartEntity = viewModel.createCartEntity(1, ProductModel())
+        assertEquals(1, testCartEntity.itemId)
+        assertEquals("", testCartEntity.price)
+        assertEquals("", testCartEntity.itemName)
+        assertEquals("", testCartEntity.imageUrl)
+    }
+
+    @Test
     fun testAddGadgetToCart() {
-        `when`(cartDao.addItemToCart(cartEntity)).thenReturn(2.toLong())
-        viewModel.addGadgetToCart(1, ProductModel())
+        `when`(cartDao.addItemToCart(cartEntity)).thenReturn(2)
+        viewModel.addGadgetToCart(cartEntity)
         assertEquals("Added to cart successfully", viewModel.getToastMessage().value)
+    }
+
+    @Test
+    fun testAddGadgetToCartFailure() {
+        `when`(cartDao.addItemToCart(cartEntity)).thenReturn(-1)
+        viewModel.addGadgetToCart(cartEntity)
+        assertEquals("Already added to cart", viewModel.getToastMessage().value)
     }
 }

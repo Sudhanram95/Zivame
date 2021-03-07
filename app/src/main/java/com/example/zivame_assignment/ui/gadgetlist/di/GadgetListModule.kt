@@ -9,6 +9,7 @@ import com.example.zivame_assignment.ui.gadgetlist.repository.GadgetListReposito
 import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit
+import java.util.concurrent.ExecutorService
 
 @Module
 class GadgetListModule {
@@ -17,6 +18,12 @@ class GadgetListModule {
     @Provides
     fun provideDbInstance(): ZivameDatabase? {
         return ZivameDatabase.getDatabase(ZivameApplication.getApplicationContext())
+    }
+
+    @GadgetListScope
+    @Provides
+    fun provideExecutor(): ExecutorService {
+        return ZivameDatabase.databaseWriteExecutor
     }
 
     @GadgetListScope
@@ -33,7 +40,8 @@ class GadgetListModule {
 
     @GadgetListScope
     @Provides
-    fun provideGadgetListRepository(apiService: GadgetListApiService, cartDao: CartDao?): GadgetListRepository {
-        return GadgetListRepository(apiService, cartDao)
+    fun provideGadgetListRepository(apiService: GadgetListApiService,
+                                    executorService: ExecutorService, cartDao: CartDao?): GadgetListRepository {
+        return GadgetListRepository(apiService, executorService, cartDao)
     }
 }

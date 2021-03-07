@@ -19,6 +19,7 @@ import org.junit.runners.JUnit4
 import org.mockito.Mock
 import org.mockito.Mockito
 import java.util.concurrent.CountDownLatch
+import java.util.concurrent.ExecutorService
 import java.util.concurrent.TimeUnit
 
 @RunWith(JUnit4::class)
@@ -29,6 +30,7 @@ class GadgetListRepositoryTest : BaseTest() {
 
     @Mock lateinit var apiService: GadgetListApiService
     @Mock lateinit var cartDao: CartDao
+    @Mock lateinit var executorService: ExecutorService
     @Mock lateinit var response: GadgetListResponse
     @Mock lateinit var networkCallback: NetworkCallback
     @Mock lateinit var ex: Exception
@@ -37,7 +39,7 @@ class GadgetListRepositoryTest : BaseTest() {
 
     @Before
     fun setUp() {
-        repository = GadgetListRepository(apiService, cartDao)
+        repository = GadgetListRepository(apiService, executorService, cartDao)
     }
 
     @Test

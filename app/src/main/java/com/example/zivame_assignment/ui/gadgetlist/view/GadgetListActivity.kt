@@ -73,7 +73,8 @@ class GadgetListActivity : DaggerAppCompatActivity(), AddToCartListener {
     }
 
     override fun onAddToCart(id: Int, productModel: ProductModel) {
-        gadgetListViewModel.addGadgetToCart(id, productModel)
+        val cartEntity = gadgetListViewModel.createCartEntity(id, productModel)
+        gadgetListViewModel.addGadgetToCart(cartEntity)
     }
 
     override fun onStop() {

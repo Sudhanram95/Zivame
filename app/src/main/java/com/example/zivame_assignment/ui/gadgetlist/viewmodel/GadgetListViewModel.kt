@@ -2,6 +2,7 @@ package com.example.zivame_assignment.ui.gadgetlist.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.zivame_assignment.database.CartEntity
 import com.example.zivame_assignment.database.DatabaseCallback
 import com.example.zivame_assignment.network.NetworkCallback
 import com.example.zivame_assignment.network.NetworkState
@@ -36,8 +37,19 @@ constructor(val repository: GadgetListRepository) : ViewModel() {
         })
     }
 
-    fun addGadgetToCart(productId: Int, productModel: ProductModel) {
-        repository.addGadgetToCart(productId, productModel, object : DatabaseCallback {
+    fun createCartEntity(productId: Int, productModel: ProductModel): CartEntity {
+        val cartEntity = CartEntity()
+        cartEntity.apply {
+            itemId = productId
+            itemName = productModel.name
+            price = productModel.price
+            imageUrl = productModel.imageUrl
+        }
+        return cartEntity
+    }
+
+    fun addGadgetToCart(cartEntity: CartEntity) {
+        repository.addGadgetToCart(cartEntity, object : DatabaseCallback {
             override fun onSuccess(response: Any) {
                 toastMessageLiveData.postValue("Added to cart successfully")
             }
