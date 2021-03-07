@@ -6,6 +6,7 @@ import com.example.zivame_assignment.database.ZivameDatabase
 import com.example.zivame_assignment.ui.cart.repository.CartRepository
 import dagger.Module
 import dagger.Provides
+import java.util.concurrent.ExecutorService
 
 @Module
 class CartModule {
@@ -18,13 +19,19 @@ class CartModule {
 
     @CartScope
     @Provides
+    fun provideExecutor(): ExecutorService {
+        return ZivameDatabase.databaseWriteExecutor
+    }
+
+    @CartScope
+    @Provides
     fun provideCartDao(dbInstance: ZivameDatabase?): CartDao? {
         return dbInstance?.cartDao()
     }
 
     @CartScope
     @Provides
-    fun provideCartRepository(cartDao: CartDao?): CartRepository {
-        return CartRepository(cartDao)
+    fun provideCartRepository(executorService: ExecutorService, cartDao: CartDao?): CartRepository {
+        return CartRepository(executorService, cartDao)
     }
 }
