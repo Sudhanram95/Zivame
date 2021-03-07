@@ -3,6 +3,7 @@ package com.example.zivame_assignment.ui.gadgetlist.repository
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.zivame_assignment.application.ZivameApplication
+import com.example.zivame_assignment.database.CartDao
 import com.example.zivame_assignment.database.CartEntity
 import com.example.zivame_assignment.database.DatabaseCallback
 import com.example.zivame_assignment.database.ZivameDatabase
@@ -14,8 +15,7 @@ import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
-class GadgetListRepository @Inject constructor(val apiService: GadgetListApiService,
-                                               val dbInstance: ZivameDatabase?) {
+class GadgetListRepository @Inject constructor(val apiService: GadgetListApiService, val cartDao: CartDao?) {
 
     fun getAllGadgetsFromApi(networkCallback: NetworkCallback) {
         apiService.getAllGadgetsList()
@@ -42,10 +42,8 @@ class GadgetListRepository @Inject constructor(val apiService: GadgetListApiServ
                 imageUrl = productModel.imageUrl
             }
 
-            dbInstance?.let {
-                val cartDao = it.cartDao()
-
-                val result = cartDao.addItemToCart(cartEntity)
+            cartDao?.let {
+                val result = it.addItemToCart(cartEntity)
                 if (result > 0) databaseCallback.onSuccess(result)
                 else databaseCallback.onFailure()
             }
@@ -53,9 +51,8 @@ class GadgetListRepository @Inject constructor(val apiService: GadgetListApiServ
     }
 
     fun getBadgeCountFromDb(): LiveData<Int>? {
-        dbInstance?.let {
-            val cartDao = it.cartDao()
-            return cartDao.getItemCount()
+        cartDao?.let {
+            return it.getItemCount()
         }
         return null
     }

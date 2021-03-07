@@ -3,6 +3,10 @@ package com.example.zivame_assignment.ui.gadgetlist
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import com.example.zivame_assignment.BaseTest
+import com.example.zivame_assignment.database.CartDao
+import com.example.zivame_assignment.database.CartEntity
+import com.example.zivame_assignment.database.DatabaseCallback
+import com.example.zivame_assignment.database.ZivameDatabase
 import com.example.zivame_assignment.network.NetworkState
 import com.example.zivame_assignment.ui.gadgetlist.model.GadgetListResponse
 import com.example.zivame_assignment.ui.gadgetlist.model.ProductModel
@@ -19,6 +23,7 @@ import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 import org.mockito.Mock
 import org.mockito.Mockito
+import org.mockito.Mockito.`when`
 import java.lang.Exception
 import java.util.concurrent.TimeUnit
 
@@ -35,11 +40,16 @@ class GadgetListViewModelTest : BaseTest() {
     @Mock
     lateinit var observerResponse: Observer<NetworkState<List<ProductModel>>>
 
+    @Mock lateinit var cartDao: CartDao
+    @Mock lateinit var cartEntity: CartEntity
+    @Mock lateinit var observerAddItem: Observer<String>
+
     @Before
     fun setUp() {
-        repository = GadgetListRepository(apiService)
+        repository = GadgetListRepository(apiService, cartDao)
         viewModel = GadgetListViewModel(repository)
         viewModel.getGadgetList().observeForever(observerResponse)
+        viewModel.getToastMessage().observeForever(observerAddItem)
     }
 
     @Test
@@ -64,5 +74,12 @@ class GadgetListViewModelTest : BaseTest() {
         viewModel.fetchAllGadgets()
         val networkState = viewModel.getGadgetList().value
         assertTrue(networkState is NetworkState.Error)
+    }
+
+    @Test
+    fun testAddGadgetToCart() {
+        `when`(cartDao.addItemToCart(cartEntity)).thenReturn(2.toLong())
+        viewModel.addGadgetToCart(1, ProductModel())
+        assertEquals("Added to cart successfully", viewModel.getToastMessage().value)
     }
 }

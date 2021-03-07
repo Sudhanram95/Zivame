@@ -2,6 +2,8 @@ package com.example.zivame_assignment.ui.gadgetlist
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.example.zivame_assignment.BaseTest
+import com.example.zivame_assignment.database.CartDao
+import com.example.zivame_assignment.database.ZivameDatabase
 import com.example.zivame_assignment.network.NetworkCallback
 import com.example.zivame_assignment.ui.gadgetlist.model.GadgetListResponse
 import com.example.zivame_assignment.ui.gadgetlist.repository.GadgetListApiService
@@ -26,6 +28,7 @@ class GadgetListRepositoryTest : BaseTest() {
     val instantTaskExecutorRule = InstantTaskExecutorRule()
 
     @Mock lateinit var apiService: GadgetListApiService
+    @Mock lateinit var cartDao: CartDao
     @Mock lateinit var response: GadgetListResponse
     @Mock lateinit var networkCallback: NetworkCallback
     @Mock lateinit var ex: Exception
@@ -34,7 +37,7 @@ class GadgetListRepositoryTest : BaseTest() {
 
     @Before
     fun setUp() {
-        repository = GadgetListRepository(apiService)
+        repository = GadgetListRepository(apiService, cartDao)
     }
 
     @Test
