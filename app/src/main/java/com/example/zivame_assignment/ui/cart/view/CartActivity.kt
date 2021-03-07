@@ -45,8 +45,7 @@ class CartActivity : DaggerAppCompatActivity(), RemoveItemListener {
         })
 
         cartViewModel.getTotalAmount()?.observe(this, Observer {
-            Log.e("CartActivity", "Total Amount: $it")
-            //TODO: Show the total amount in cart activity
+            btnCheckout.text = "Checkout - Rs. $it"
         })
     }
 

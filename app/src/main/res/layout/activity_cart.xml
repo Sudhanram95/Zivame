@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -10,6 +9,7 @@
     tools:context=".ui.cart.view.CartActivity">
 
     <RelativeLayout
+        android:id="@+id/actionBar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_70sdp"
         android:background="@color/colorPrimary">
@@ -24,9 +24,28 @@
 
     </RelativeLayout>
 
+    <RelativeLayout
+        android:id="@+id/relButton"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_75sdp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/white"
+        android:paddingStart="@dimen/_20sdp"
+        android:paddingEnd="@dimen/_20sdp">
+
+        <Button
+            android:id="@+id/btnCheckout"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_50sdp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/solid_rounded_corner"/>
+    </RelativeLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvCart"
+        android:layout_below="@id/actionBar"
+        android:layout_above="@id/relButton"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
-</LinearLayout>
+</RelativeLayout>
