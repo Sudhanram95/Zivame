@@ -71,4 +71,8 @@ class CheckoutActivity : DaggerAppCompatActivity() {
         super.onDestroy()
         checkoutViewModel.cancelTimer()
     }
+
+    override fun onBackPressed() {
+        //Disabling physical back press
+    }
 }
