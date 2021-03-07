@@ -21,6 +21,7 @@
         style="@style/SmallTextBold"
         android:gravity="center"
         android:text="Remove"
+        android:textColor="@color/blue"
         android:layout_alignParentEnd="true"/>
 
     <LinearLayout

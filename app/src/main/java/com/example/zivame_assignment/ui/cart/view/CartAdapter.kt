@@ -1,6 +1,7 @@
 package com.example.zivame_assignment.ui.cart.view
 
 import android.content.Context
+import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -50,6 +51,7 @@ class CartAdapter(val context: Context,
         holder.txtProductName.text = cartEntity.itemName
         holder.txtProductPrice.text = "Rs. ${cartEntity.price}"
 
+        holder.txtRemove.setPaintFlags(holder.txtRemove.getPaintFlags() or Paint.UNDERLINE_TEXT_FLAG)
         holder.txtRemove.setOnClickListener {
             (context as RemoveItemListener).onRemoveItemFromCart(position, cartEntity)
         }

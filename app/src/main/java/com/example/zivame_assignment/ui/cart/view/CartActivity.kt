@@ -45,7 +45,7 @@ class CartActivity : DaggerAppCompatActivity(), RemoveItemListener {
         })
 
         cartViewModel.getTotalAmount()?.observe(this, Observer {
-            btnCheckout.text = "Checkout - Rs. $it"
+            btnCheckout.text = "Checkout - Rs.$it"
         })
     }
 
@@ -61,5 +61,6 @@ class CartActivity : DaggerAppCompatActivity(), RemoveItemListener {
 
         cartViewModel.getCartList().removeObservers(this)
         cartViewModel.getResult().removeObservers(this)
+        cartViewModel.getTotalAmount()?.removeObservers(this)
     }
 }
