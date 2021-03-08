@@ -10,6 +10,7 @@ import com.example.zivame_assignment.R
 import com.example.zivame_assignment.application.viewmodel.ViewModelFactory
 import com.example.zivame_assignment.network.NetworkState
 import com.example.zivame_assignment.ui.cart.view.CartActivity
+import com.example.zivame_assignment.ui.errorhandling.ErrorActivity
 import com.example.zivame_assignment.ui.gadgetlist.model.ProductModel
 import com.example.zivame_assignment.ui.gadgetlist.viewmodel.GadgetListViewModel
 import dagger.android.support.DaggerAppCompatActivity
@@ -54,7 +55,10 @@ class GadgetListActivity : DaggerAppCompatActivity(), AddToCartListener {
                 }
 
                 is NetworkState.Error -> {
-                    //TODO: Network error handling
+                    val intent = Intent(this, ErrorActivity::class.java)
+                    intent.putExtra("ErrorMessage", it.error.message)
+                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                    startActivity(intent)
                 }
             }
         })

@@ -8,6 +8,7 @@ import com.example.zivame_assignment.ui.checkout.di.CheckoutModule
 import com.example.zivame_assignment.ui.checkout.di.CheckoutScope
 import com.example.zivame_assignment.ui.checkout.di.CheckoutViewModelModule
 import com.example.zivame_assignment.ui.checkout.view.CheckoutActivity
+import com.example.zivame_assignment.ui.errorhandling.ErrorActivity
 import com.example.zivame_assignment.ui.gadgetlist.di.GadgetListModule
 import com.example.zivame_assignment.ui.gadgetlist.di.GadgetListScope
 import com.example.zivame_assignment.ui.gadgetlist.di.GadgetListViewModelModule
@@ -29,4 +30,7 @@ abstract class ActivityBuilderModule {
     @CheckoutScope
     @ContributesAndroidInjector(modules = [CheckoutModule::class, CheckoutViewModelModule::class])
     abstract fun contributeCheckoutActivity(): CheckoutActivity
+
+    @ContributesAndroidInjector
+    abstract fun contributeErrorActivity(): ErrorActivity
 }

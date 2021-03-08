@@ -27,6 +27,7 @@ class CartActivity : DaggerAppCompatActivity(), RemoveItemListener {
         setContentView(R.layout.activity_cart)
 
         cartViewModel = ViewModelProvider(this, viewModelFactory).get(CartViewModel::class.java)
+        observeViewModel()
         initializeView()
     }
 
@@ -39,11 +40,6 @@ class CartActivity : DaggerAppCompatActivity(), RemoveItemListener {
             val intent = Intent(this, CheckoutActivity::class.java)
             startActivity(intent)
         }
-    }
-
-    override fun onStart() {
-        super.onStart()
-        observeViewModel()
     }
 
     private fun observeViewModel() {
@@ -82,11 +78,12 @@ class CartActivity : DaggerAppCompatActivity(), RemoveItemListener {
         }
     }
 
-    override fun onStop() {
-        super.onStop()
+    override fun onDestroy() {
+        super.onDestroy()
 
         cartViewModel.getCartList().removeObservers(this)
         cartViewModel.getResult().removeObservers(this)
         cartViewModel.getTotalAmount()?.removeObservers(this)
+        cartViewModel.getShowEmptyCart().removeObservers(this)
     }
 }
