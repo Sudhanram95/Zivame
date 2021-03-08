@@ -12,18 +12,6 @@ class CheckoutModule {
 
     @CheckoutScope
     @Provides
-    fun provideDbInstance(): ZivameDatabase? {
-        return ZivameDatabase.getDatabase(ZivameApplication.getApplicationContext())
-    }
-
-    @CheckoutScope
-    @Provides
-    fun provideCartDao(dbInstance: ZivameDatabase?): CartDao? {
-        return dbInstance?.cartDao()
-    }
-
-    @CheckoutScope
-    @Provides
     fun provideCheckoutRepository(cartDao: CartDao?): CheckoutRepository {
         return CheckoutRepository(cartDao)
     }

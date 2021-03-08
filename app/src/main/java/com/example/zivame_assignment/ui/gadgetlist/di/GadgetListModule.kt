@@ -16,24 +16,6 @@ class GadgetListModule {
 
     @GadgetListScope
     @Provides
-    fun provideDbInstance(): ZivameDatabase? {
-        return ZivameDatabase.getDatabase(ZivameApplication.getApplicationContext())
-    }
-
-    @GadgetListScope
-    @Provides
-    fun provideExecutor(): ExecutorService {
-        return ZivameDatabase.databaseWriteExecutor
-    }
-
-    @GadgetListScope
-    @Provides
-    fun provideCartDao(dbInstance: ZivameDatabase?): CartDao? {
-        return dbInstance?.cartDao()
-    }
-
-    @GadgetListScope
-    @Provides
     fun provideGadgetListApiService(retrofit: Retrofit): GadgetListApiService {
         return retrofit.create(GadgetListApiService::class.java)
     }

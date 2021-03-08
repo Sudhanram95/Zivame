@@ -13,24 +13,6 @@ class CartModule {
 
     @CartScope
     @Provides
-    fun provideDbInstance(): ZivameDatabase? {
-        return ZivameDatabase.getDatabase(ZivameApplication.getApplicationContext())
-    }
-
-    @CartScope
-    @Provides
-    fun provideExecutor(): ExecutorService {
-        return ZivameDatabase.databaseWriteExecutor
-    }
-
-    @CartScope
-    @Provides
-    fun provideCartDao(dbInstance: ZivameDatabase?): CartDao? {
-        return dbInstance?.cartDao()
-    }
-
-    @CartScope
-    @Provides
     fun provideCartRepository(executorService: ExecutorService, cartDao: CartDao?): CartRepository {
         return CartRepository(executorService, cartDao)
     }
