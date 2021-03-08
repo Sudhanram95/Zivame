@@ -2,6 +2,7 @@ package com.example.zivame_assignment.ui.cart.view
 
 import android.content.Context
 import android.graphics.Paint
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -53,11 +54,15 @@ class CartAdapter(val context: Context,
 
         holder.txtRemove.setPaintFlags(holder.txtRemove.getPaintFlags() or Paint.UNDERLINE_TEXT_FLAG)
         holder.txtRemove.setOnClickListener {
-            (context as RemoveItemListener).onRemoveItemFromCart(position, cartEntity)
+            Log.e("Remove onClick", "Position: $position")
+            Log.e("Remove onClick", "id: ${cartEntity.itemId}")
+            (context as RemoveItemListener).onRemoveItemFromCart(holder.adapterPosition, cartEntity)
         }
     }
 
     fun removeItemFromCart(position: Int, cartEntity: CartEntity) {
+        Log.e("Remove callback", "Position: $position")
+        Log.e("Remove callback", "id: ${cartEntity.itemId}")
         cartList.remove(cartEntity)
         notifyItemRemoved(position)
     }

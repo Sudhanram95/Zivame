@@ -42,7 +42,7 @@ constructor(val repository: GadgetListRepository) : ViewModel() {
     fun createCartEntity(productId: Int, productModel: ProductModel): CartEntity {
         val cartEntity = CartEntity()
         cartEntity.apply {
-            itemId = productId
+            itemId = productId + 1
             itemName = productModel.name
             price = productModel.price
             imageUrl = productModel.imageUrl

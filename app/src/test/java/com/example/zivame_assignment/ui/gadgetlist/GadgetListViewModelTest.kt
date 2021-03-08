@@ -82,7 +82,7 @@ class GadgetListViewModelTest : BaseTest() {
     @Test
     fun testCreateCartEntity() {
         val testCartEntity = viewModel.createCartEntity(1, ProductModel())
-        assertEquals(1, testCartEntity.itemId)
+        assertEquals(2, testCartEntity.itemId)
         assertEquals("", testCartEntity.price)
         assertEquals("", testCartEntity.itemName)
         assertEquals("", testCartEntity.imageUrl)
