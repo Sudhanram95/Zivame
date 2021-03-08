@@ -17,7 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="Gadgets"
+            android:text="@string/gadgets_title"
             android:textColor="@color/white"
             style="@style/BigText"/>
 
@@ -33,7 +33,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="0"
+                android:text="@string/default_count"
                 android:gravity="center"
                 android:layout_centerHorizontal="true"
                 android:id="@+id/txtBadgeCount"
@@ -48,7 +48,7 @@
                 android:layout_marginTop="-7dp"
                 android:layout_below="@id/txtBadgeCount"
                 android:src="@drawable/ic_cart"
-                android:contentDescription="Cart icon"/>
+                android:contentDescription="@string/cart_icon"/>
 
         </RelativeLayout>
 

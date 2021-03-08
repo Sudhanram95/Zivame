@@ -24,7 +24,7 @@
         android:layout_below="@id/txtErrorMsg"
         android:layout_marginTop="@dimen/_10sdp"
         android:layout_centerHorizontal="true"
-        android:text="Retry"
+        android:text="@string/retry_cta"
         android:textColor="@color/white"
         android:textAllCaps="false"
         android:background="@drawable/border_rounded_corner"/>

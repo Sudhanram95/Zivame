@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -27,7 +26,7 @@
             style="@style/BigText"
             android:gravity="center"
             android:layout_marginTop="@dimen/_10sdp"
-            android:text="Please wait while we process\n the payment"/>
+            android:text="@string/proccessing_msg"/>
     </LinearLayout>
 
     <LinearLayout
@@ -41,7 +40,8 @@
             android:layout_width="@dimen/_200sdp"
             android:layout_height="@dimen/_200sdp"
             android:src="@drawable/ic_congratuation"
-            android:layout_gravity="center_horizontal"/>
+            android:layout_gravity="center_horizontal"
+            android:contentDescription="@string/congratuation"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -51,7 +51,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="@dimen/_10sdp"
             style="@style/BigTextBold"
-            android:text="Your order has been placed!"/>
+            android:text="@string/order_successful_msg"/>
 
         <Button
             android:id="@+id/btnContinueShopping"
@@ -60,7 +60,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="@dimen/_10sdp"
             android:background="@drawable/border_rounded_corner"
-            android:text="Continue Shopping"
+            android:text="@string/continue_shopping_cta"
             style="@style/SmallTextBold"
             android:textAllCaps="false"/>
     </LinearLayout>

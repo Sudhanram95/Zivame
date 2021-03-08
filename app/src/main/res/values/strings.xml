@@ -1,3 +1,18 @@
 <resources>
     <string name="app_name">Zivame-Assignment</string>
+    <string name="cart_title">Cart</string>
+    <string name="empty_cart_msg">Cart is Empty!</string>
+    <string name="back_arrow">Back arrow</string>
+    <string name="proccessing_msg">Please wait while we process\n the payment</string>
+    <string name="congratuation">Congratuation</string>
+    <string name="order_successful_msg">Your order has been placed!</string>
+    <string name="continue_shopping_cta">Continue Shopping</string>
+    <string name="retry_cta">Retry</string>
+    <string name="gadgets_title">Gadgets</string>
+    <string name="default_count">0</string>
+    <string name="cart_icon">Cart icon</string>
+    <string name="cart_item_image">Cart Item image</string>
+    <string name="remove_cta">Remove</string>
+    <string name="gadget_image">Gadget Image</string>
+    <string name="add_to_cart_cta">Add to Cart</string>
 </resources>

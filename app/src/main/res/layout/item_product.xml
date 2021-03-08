@@ -31,7 +31,7 @@
             android:layout_height="@dimen/_200sdp"
             android:layout_marginTop="@dimen/_10sdp"
             android:layout_gravity="center_horizontal"
-            android:contentDescription="Gadget Image"/>
+            android:contentDescription="@string/gadget_image"/>
 
         <TextView
             android:id="@+id/txtName"
@@ -47,7 +47,7 @@
             android:layout_width="@dimen/_100sdp"
             android:layout_height="@dimen/_35sdp"
             android:layout_marginTop="@dimen/_10sdp"
-            android:text="Add to Cart"
+            android:text="@string/add_to_cart_cta"
             android:textColor="@color/white"
             android:textAllCaps="false"
             android:background="@drawable/solid_rounded_corner"

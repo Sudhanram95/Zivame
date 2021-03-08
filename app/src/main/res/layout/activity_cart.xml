@@ -20,13 +20,14 @@
             android:layout_height="@dimen/_25sdp"
             android:layout_centerVertical="true"
             android:layout_marginStart="@dimen/_5sdp"
-            android:src="@drawable/ic_arrow"/>
+            android:src="@drawable/ic_arrow"
+            android:contentDescription="@string/back_arrow"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="Cart"
+            android:text="@string/cart_title"
             android:textColor="@color/white"
             style="@style/BigText"/>
 
@@ -61,7 +62,7 @@
         android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Cart is Empty!"
+        android:text="@string/empty_cart_msg"
         style="@style/BigTextBold"
         android:layout_centerInParent="true"/>
 

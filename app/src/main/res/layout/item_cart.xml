@@ -11,7 +11,7 @@
         android:layout_width="@dimen/_100sdp"
         android:layout_height="@dimen/_100sdp"
         android:id="@+id/img_item"
-        android:contentDescription="Cart Item image"/>
+        android:contentDescription="@string/cart_item_image"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -20,7 +20,7 @@
         android:layout_alignParentBottom="true"
         style="@style/SmallTextBold"
         android:gravity="center"
-        android:text="Remove"
+        android:text="@string/remove_cta"
         android:textColor="@color/blue"
         android:layout_alignParentEnd="true"/>
 
