@@ -14,6 +14,7 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
+import org.mockito.ArgumentMatchers.anyInt
 import org.mockito.Mock
 import org.mockito.Mockito.`when`
 
@@ -29,6 +30,7 @@ class CartViewModelTest : BaseTest() {
     @Mock lateinit var cartDao: CartDao
     @Mock lateinit var observerCartList: Observer<List<CartEntity>>
     @Mock lateinit var observerResult: Observer<String>
+    @Mock lateinit var observerShowEmptyCart: Observer<Boolean>
 
     @Before
     fun setUp() {
@@ -38,18 +40,32 @@ class CartViewModelTest : BaseTest() {
 
         viewModel.getCartList().observeForever(observerCartList)
         viewModel.getResult().observeForever(observerResult)
+        viewModel.getShowEmptyCart().observeForever(observerShowEmptyCart)
     }
 
     @Test
-    fun testFetchAllItemsInCart() {
+    fun testFetchAllItemsInCartCase1() {
         val testEntity = CartEntity()
         val testCartList = ArrayList<CartEntity>()
         testCartList.add(testEntity)
 
         `when`(cartDao.getAllItemsInCart()).thenReturn(testCartList)
         viewModel.fetchAllItemsInCart()
+        assertNull(viewModel.getShowEmptyCart().value)
         assertNotNull(viewModel.getCartList().value)
         assertEquals(1, viewModel.getCartList().value?.size)
+    }
+
+    @Test
+    fun testFetchAllItemsInCartCase2() {
+        val testCartList = ArrayList<CartEntity>()
+
+        `when`(cartDao.getAllItemsInCart()).thenReturn(testCartList)
+        viewModel.fetchAllItemsInCart()
+        assertNotNull(viewModel.getShowEmptyCart().value)
+        assertTrue(viewModel.getShowEmptyCart().value!!)
+        assertNotNull(viewModel.getCartList().value)
+        assertEquals(0, viewModel.getCartList().value?.size)
     }
 
     @Test
@@ -79,5 +95,18 @@ class CartViewModelTest : BaseTest() {
 
         testViewModel.removeItemFromCart(1)
         assertEquals("Could not remove item!", testViewModel.getResult().value)
+    }
+
+    @Test
+    fun testCheckIfCartIsEmptyCase1() {
+        viewModel.checkIfCartIsEmpty(null)
+        assertNotNull(viewModel.getShowEmptyCart().value)
+        assertTrue(viewModel.getShowEmptyCart().value!!)
+    }
+
+    @Test
+    fun testCheckIfCartIsEmptyCase2() {
+        viewModel.checkIfCartIsEmpty(100)
+        assertNull(viewModel.getShowEmptyCart().value)
     }
 }
