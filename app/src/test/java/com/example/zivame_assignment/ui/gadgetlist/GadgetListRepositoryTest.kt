@@ -41,7 +41,6 @@ class GadgetListRepositoryTest : BaseTest() {
     @Mock lateinit var response: GadgetListResponse
     @Mock lateinit var networkCallback: NetworkCallback
     @Mock lateinit var ex: Exception
-    @Mock lateinit var observerBadgeCount: Observer<Int>
 
     lateinit var repository: GadgetListRepository
 
@@ -99,7 +98,7 @@ class GadgetListRepositoryTest : BaseTest() {
 
         val inOrder = Mockito.inOrder(databaseCallback)
         inOrder.verify(databaseCallback, Mockito.times(1)).onFailure()
-        Mockito.verify(databaseCallback, Mockito.never()).onSuccess(-1.toLong())
+        Mockito.verify(databaseCallback, Mockito.never()).onSuccess(any())
     }
 
     @Test
