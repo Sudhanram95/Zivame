@@ -2,7 +2,6 @@ package com.example.zivame_assignment.ui.checkout.repository
 
 import com.example.zivame_assignment.database.CartDao
 import com.example.zivame_assignment.database.DatabaseCallback
-import com.example.zivame_assignment.database.ZivameDatabase
 import java.util.concurrent.ExecutorService
 import javax.inject.Inject
 

@@ -1,6 +1,5 @@
 package com.example.zivame_assignment.database
 
-import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
@@ -16,7 +15,7 @@ abstract class ZivameDatabase : RoomDatabase() {
         var INSTANCE: ZivameDatabase? = null
         val databaseWriteExecutor = Executors.newSingleThreadExecutor()
 
-        fun getDatabase(context: Context): ZivameDatabase? {
+        fun getDatabase(): ZivameDatabase? {
             if (INSTANCE == null) {
                 synchronized(ZivameDatabase::class.java) {
                     if (INSTANCE == null) {

@@ -1,9 +1,6 @@
 package com.example.zivame_assignment.ui.gadgetlist.di
 
-import com.example.zivame_assignment.application.ZivameApplication
 import com.example.zivame_assignment.database.CartDao
-import com.example.zivame_assignment.database.ZivameDatabase
-import com.example.zivame_assignment.ui.cart.di.CartScope
 import com.example.zivame_assignment.ui.gadgetlist.repository.GadgetListApiService
 import com.example.zivame_assignment.ui.gadgetlist.repository.GadgetListRepository
 import dagger.Module

@@ -1,15 +1,11 @@
 package com.example.zivame_assignment.ui.gadgetlist.repository
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import com.example.zivame_assignment.application.ZivameApplication
 import com.example.zivame_assignment.database.CartDao
 import com.example.zivame_assignment.database.CartEntity
 import com.example.zivame_assignment.database.DatabaseCallback
-import com.example.zivame_assignment.database.ZivameDatabase
 import com.example.zivame_assignment.network.NetworkCallback
 import com.example.zivame_assignment.ui.gadgetlist.model.GadgetListResponse
-import com.example.zivame_assignment.ui.gadgetlist.model.ProductModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.schedulers.Schedulers

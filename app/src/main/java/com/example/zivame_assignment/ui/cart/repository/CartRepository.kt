@@ -3,7 +3,6 @@ package com.example.zivame_assignment.ui.cart.repository
 import androidx.lifecycle.LiveData
 import com.example.zivame_assignment.database.CartDao
 import com.example.zivame_assignment.database.DatabaseCallback
-import com.example.zivame_assignment.database.ZivameDatabase
 import java.util.concurrent.ExecutorService
 import javax.inject.Inject
 
