@@ -13,15 +13,20 @@ class CartViewModel @Inject constructor(val repository: CartRepository) : ViewMo
 
     private val cartListLiveData = MutableLiveData<List<CartEntity>>()
     private val resultLiveData = SingleLiveEvent<String>()
+    private val showEmptyCartLiveData = SingleLiveEvent<Boolean>()
 
     fun getCartList(): LiveData<List<CartEntity>> = cartListLiveData
     fun getResult(): LiveData<String> = resultLiveData
-    fun getTotalAmount() = repository.getTotalAmount()
+    fun getShowEmptyCart() = showEmptyCartLiveData
+    fun getTotalAmount(): LiveData<Int>? = repository.getTotalAmount()
 
     fun fetchAllItemsInCart() {
         repository.getAllItemsInCartTable(object : DatabaseCallback {
             override fun onSuccess(response: Any) {
                 if (response is List<*>) {
+                    if (response.isEmpty())
+                        showEmptyCartLiveData.postValue(true)
+
                     cartListLiveData.postValue(response.filterIsInstance<CartEntity>())
                 }
             }
@@ -42,5 +47,11 @@ class CartViewModel @Inject constructor(val repository: CartRepository) : ViewMo
                 resultLiveData.postValue( "Could not remove item!")
             }
         })
+    }
+
+    fun checkIfCartIsEmpty(totalAmount: Int?) {
+        if (totalAmount == null) {
+            showEmptyCartLiveData.value = true
+        }
     }
 }

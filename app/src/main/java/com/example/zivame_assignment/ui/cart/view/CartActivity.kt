@@ -2,6 +2,7 @@ package com.example.zivame_assignment.ui.cart.view
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -31,6 +32,9 @@ class CartActivity : DaggerAppCompatActivity(), RemoveItemListener {
 
     private fun initializeView() {
         cartViewModel.fetchAllItemsInCart()
+
+        imgBack.setOnClickListener { onBackPressed() }
+
         btnCheckout.setOnClickListener {
             val intent = Intent(this, CheckoutActivity::class.java)
             startActivity(intent)
@@ -54,7 +58,20 @@ class CartActivity : DaggerAppCompatActivity(), RemoveItemListener {
         })
 
         cartViewModel.getTotalAmount()?.observe(this, Observer {
+            cartViewModel.checkIfCartIsEmpty(it)
             btnCheckout.text = "Checkout - Rs.$it"
+        })
+
+        cartViewModel.getShowEmptyCart().observe(this, Observer {
+            if (it) {
+                txtEmptyCart.visibility = View.VISIBLE
+                rvCart.visibility = View.GONE
+                relButton.visibility = View.GONE
+            } else {
+                txtEmptyCart.visibility = View.GONE
+                rvCart.visibility = View.VISIBLE
+                relButton.visibility = View.VISIBLE
+            }
         })
     }
 
