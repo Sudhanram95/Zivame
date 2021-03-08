@@ -1,6 +1,7 @@
 package com.example.zivame_assignment.ui.checkout.viewmodel
 
 import android.os.CountDownTimer
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.zivame_assignment.database.DatabaseCallback
@@ -14,8 +15,8 @@ class CheckoutViewModel @Inject constructor(val repository: CheckoutRepository) 
     private val showLoadingLiveData = MutableLiveData<Boolean>()
     private val removeAllItemsLiveData = MutableLiveData<Boolean>()
 
-    fun getShowLoading() = showLoadingLiveData
-    fun getRemoveAllItems() = removeAllItemsLiveData
+    fun getShowLoading(): LiveData<Boolean> = showLoadingLiveData
+    fun getRemoveAllItems(): LiveData<Boolean> = removeAllItemsLiveData
 
     fun startCountDown() {
         countDownTimer = object : CountDownTimer(10*1000, 1000) {

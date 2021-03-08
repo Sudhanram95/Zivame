@@ -28,10 +28,6 @@ class GadgetListActivity : DaggerAppCompatActivity(), AddToCartListener {
         gadgetListViewModel = ViewModelProvider(this, viewModelFactory).get(GadgetListViewModel::class.java)
 
         initializeView()
-    }
-
-    override fun onStart() {
-        super.onStart()
         observeViewModel()
     }
 
@@ -77,8 +73,10 @@ class GadgetListActivity : DaggerAppCompatActivity(), AddToCartListener {
         gadgetListViewModel.addGadgetToCart(cartEntity)
     }
 
-    override fun onStop() {
-        super.onStop()
+    override fun onDestroy() {
+        super.onDestroy()
         gadgetListViewModel.getGadgetList().removeObservers(this)
+        gadgetListViewModel.getToastMessage().removeObservers(this)
+        gadgetListViewModel.getBadgeCount()?.removeObservers(this)
     }
 }

@@ -1,5 +1,6 @@
 package com.example.zivame_assignment.ui.cart.viewmodel
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.zivame_assignment.database.CartEntity
@@ -12,8 +13,8 @@ class CartViewModel @Inject constructor(val repository: CartRepository) : ViewMo
     private val cartListLiveData = MutableLiveData<List<CartEntity>>()
     private val resultLiveData = MutableLiveData<String>()
 
-    fun getCartList() = cartListLiveData
-    fun getResult() = resultLiveData
+    fun getCartList(): LiveData<List<CartEntity>> = cartListLiveData
+    fun getResult(): LiveData<String> = resultLiveData
     fun getTotalAmount() = repository.getTotalAmount()
 
     fun fetchAllItemsInCart() {

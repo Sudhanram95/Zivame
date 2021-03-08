@@ -1,5 +1,6 @@
 package com.example.zivame_assignment.ui.gadgetlist.viewmodel
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.zivame_assignment.database.CartEntity
@@ -17,8 +18,8 @@ constructor(val repository: GadgetListRepository) : ViewModel() {
     private val gadgetListLiveData = MutableLiveData<NetworkState<List<ProductModel>>>()
     private val toastMessageLiveData = MutableLiveData<String>()
 
-    fun getGadgetList() = gadgetListLiveData
-    fun getToastMessage() = toastMessageLiveData
+    fun getGadgetList(): LiveData<NetworkState<List<ProductModel>>> = gadgetListLiveData
+    fun getToastMessage(): LiveData<String> = toastMessageLiveData
     fun getBadgeCount() = repository.getBadgeCountFromDb()
 
     fun fetchAllGadgets() {
