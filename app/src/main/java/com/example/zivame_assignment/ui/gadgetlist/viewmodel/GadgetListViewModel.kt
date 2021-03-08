@@ -3,6 +3,7 @@ package com.example.zivame_assignment.ui.gadgetlist.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.zivame_assignment.application.viewmodel.SingleLiveEvent
 import com.example.zivame_assignment.database.CartEntity
 import com.example.zivame_assignment.database.DatabaseCallback
 import com.example.zivame_assignment.network.NetworkCallback
@@ -16,7 +17,7 @@ class GadgetListViewModel @Inject
 constructor(val repository: GadgetListRepository) : ViewModel() {
 
     private val gadgetListLiveData = MutableLiveData<NetworkState<List<ProductModel>>>()
-    private val toastMessageLiveData = MutableLiveData<String>()
+    private val toastMessageLiveData = SingleLiveEvent<String>()
 
     fun getGadgetList(): LiveData<NetworkState<List<ProductModel>>> = gadgetListLiveData
     fun getToastMessage(): LiveData<String> = toastMessageLiveData

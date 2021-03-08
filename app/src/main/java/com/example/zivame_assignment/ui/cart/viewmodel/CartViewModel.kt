@@ -3,6 +3,7 @@ package com.example.zivame_assignment.ui.cart.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.zivame_assignment.application.viewmodel.SingleLiveEvent
 import com.example.zivame_assignment.database.CartEntity
 import com.example.zivame_assignment.database.DatabaseCallback
 import com.example.zivame_assignment.ui.cart.repository.CartRepository
@@ -11,7 +12,7 @@ import javax.inject.Inject
 class CartViewModel @Inject constructor(val repository: CartRepository) : ViewModel() {
 
     private val cartListLiveData = MutableLiveData<List<CartEntity>>()
-    private val resultLiveData = MutableLiveData<String>()
+    private val resultLiveData = SingleLiveEvent<String>()
 
     fun getCartList(): LiveData<List<CartEntity>> = cartListLiveData
     fun getResult(): LiveData<String> = resultLiveData
